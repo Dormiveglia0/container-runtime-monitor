@@ -2,6 +2,12 @@
 
 基于 eBPF 的容器运行时安全检测系统，用于采集 Docker 容器内的 `execve` 行为，并基于规则检测可疑命令执行事件。
 
+## 项目状态
+
+当前为半成品版本，进度处于 MVP-1：容器 `execve` 安全监测闭环完成。
+
+MVP-1 已完成从 eBPF 事件采集、容器进程识别、规则匹配、告警输出到 SQLite 持久化的基础闭环。
+
 ## 功能特性
 
 - 使用 eBPF tracepoint 采集 `sys_enter_execve` 事件
