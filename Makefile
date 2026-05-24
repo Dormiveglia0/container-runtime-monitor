@@ -11,7 +11,7 @@ generate: $(VMLINUX)
 
 build: generate
 	mkdir -p bin
-	go build -o bin/agent ./cmd/agent
+	go build -buildvcs=false -o bin/agent ./cmd/agent
 
 run: build
 	./bin/agent
