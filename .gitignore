@@ -1,0 +1,19 @@
+# Build artifacts
+bin/
+
+# Local runtime data
+data/
+*.db
+*.db-*
+
+# Locally generated kernel BTF header
+bpf/vmlinux.h
+
+# Editor and OS files
+.DS_Store
+.idea/
+.vscode/
+
+# Codex/local workspace metadata
+.agents/
+.codex/
