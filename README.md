@@ -47,7 +47,7 @@ sudo make run
 
 运行后系统会监听 Docker 容器中的命令执行行为，并在终端输出执行事件与命中的告警规则。
 
-`make generate` 会基于 `/sys/kernel/btf/vmlinux` 生成本机的 `bpf/vmlinux.h`，该文件属于本地生成物，不提交到仓库。
+`make build` 会先执行 `make generate`，基于 `/sys/kernel/btf/vmlinux` 生成本机的 `bpf/vmlinux.h`，再通过 bpf2go 生成 `internal/collector/execve_bpfel.go` 和 `internal/collector/execve_bpfel.o`。这些文件属于本地生成物，不提交到仓库。
 
 ## 规则示例
 
