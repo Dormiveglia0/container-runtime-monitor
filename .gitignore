@@ -9,6 +9,10 @@ data/
 # Locally generated kernel BTF header
 bpf/vmlinux.h
 
+# bpf2go generated artifacts
+internal/collector/execve_bpfel.go
+internal/collector/execve_bpfel.o
+
 # Editor and OS files
 .DS_Store
 .idea/
