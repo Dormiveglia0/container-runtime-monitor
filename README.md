@@ -67,4 +67,4 @@ sudo make run
 
 ## 数据存储
 
-事件默认写入 `data/monitor.db`。该文件属于本地运行数据，不会提交到 Git 仓库。
+事件默认写入 `data/monitor.db`。
