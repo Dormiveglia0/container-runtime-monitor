@@ -1,0 +1,123 @@
+version: 1
+
+exec_rules:
+  - id: exec.shell
+    severity: medium
+    message: container started an interactive shell
+    commands:
+      - bash
+      - sh
+
+  - id: exec.downloader
+    severity: medium
+    message: container executed a download tool
+    commands:
+      - curl
+      - wget
+
+  - id: exec.netcat
+    severity: high
+    message: container executed netcat-like tool
+    commands:
+      - nc
+      - ncat
+      - netcat
+
+  - id: exec.escape-tool
+    severity: high
+    message: container executed a namespace or mount related tool
+    commands:
+      - mount
+      - setns
+      - unshare
+      - nsenter
+
+  - id: exec.permission-change
+    severity: low
+    message: container executed a permission changing tool
+    commands:
+      - chmod
+      - chown
+
+file_ignore:
+  path_prefixes:
+    - /var/lib/docker/
+
+  by_comm_prefix:
+    - comm_prefix: runc
+      paths:
+        - /proc/kcore
+        - /etc/passwd
+      path_prefixes:
+        - /var/lib/docker/
+
+file_rules:
+  - id: file.docker-sock
+    severity: critical
+    message: container accessed Docker socket
+    access: any
+    exact:
+      - /var/run/docker.sock
+      - /run/docker.sock
+
+  - id: file.shadow-write
+    severity: critical
+    message: container opened /etc/shadow with write flags
+    access: write
+    exact:
+      - /etc/shadow
+
+  - id: file.shadow-read
+    severity: high
+    message: container accessed /etc/shadow
+    access: any
+    exact:
+      - /etc/shadow
+
+  - id: file.passwd-write
+    severity: high
+    message: container opened /etc/passwd with write flags
+    access: write
+    exact:
+      - /etc/passwd
+
+  - id: file.passwd-read
+    severity: medium
+    message: container accessed /etc/passwd
+    access: any
+    exact:
+      - /etc/passwd
+
+  - id: file.ssh-write
+    severity: high
+    message: container opened root SSH files with write flags
+    access: write
+    prefixes:
+      - /root/.ssh/
+
+  - id: file.ssh-read
+    severity: medium
+    message: container accessed root SSH files
+    access: any
+    prefixes:
+      - /root/.ssh/
+
+  - id: file.proc-sys-write
+    severity: high
+    message: container opened /proc/sys path with write flags
+    access: write
+    prefixes:
+      - /proc/sys/
+
+  - id: file.proc-sensitive
+    severity: high
+    message: container accessed sensitive /proc path
+    access: any
+    proc_sensitive: true
+
+  - id: file.sys-write
+    severity: high
+    message: container opened /sys path with write flags
+    access: write
+    prefixes:
+      - /sys/
