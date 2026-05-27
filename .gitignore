@@ -12,6 +12,8 @@ bpf/vmlinux.h
 # bpf2go generated artifacts
 internal/collector/execve_bpfel.go
 internal/collector/execve_bpfel.o
+internal/collector/file_bpfel.go
+internal/collector/file_bpfel.o
 
 # Editor and OS files
 .DS_Store
